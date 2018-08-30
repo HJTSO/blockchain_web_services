@@ -12,9 +12,9 @@ const chain = new Blockchain()
 index.listen(8000, () => console.log('listening port: 8000'))
 index.use(bodyParser.json())
 
-index.get('/', (req, res) => res.status(404).json({
+index.get('/', (req, res) => res.status(404).json({ //could not be show in terminal
   "status": 404,
-  "message": "Accepted endpoints: POST /block or GET /block/{BLOCK_HEIGHT}"
+  "message": "Accepted endpoints: POST /block or GET /block/{BLOCK_HEIGHT}" 
 }))
 
 // GET Block endpoint using URL path with block height parameter. Preferred URL path http://localhost:8000/block/{BLOCK_HEIGHT}
@@ -23,9 +23,9 @@ index.get('/block/:height', async (req, res) => {
     const response = await chain.getBlock(req.params.height)
     res.send(response)
   } catch (error) {
-    res.status(404).json({
+    res.status(404).json({ //could not be show in terminal
       "status": 404,
-      "message": "This block is not found."
+      "message": "This block is not found." 
     })
   }
 })
@@ -36,7 +36,7 @@ index.get('/block/:height', async (req, res) => {
 //   Request body: {"body":"block body contents"}
 index.post('/block', async (req, res) => {
   if (req.body.body === '' || req.body.body === undefined) {
-    res.status(400).json({
+    res.status(400).json({ //could not be show in terminal
       "status": 400,
       message: "Please fill the body parameter to create a new block"
     })
