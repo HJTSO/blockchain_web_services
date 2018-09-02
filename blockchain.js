@@ -11,6 +11,7 @@ const SHA256 = require('crypto-js/sha256');
 const level = require('level');
 const chainDB = './chaindata';
 const db = level(chainDB);
+const Block = require('./block')
 
 // Add data to levelDB with key/value pair
 function addDataToLevelDB(key, value) {
@@ -62,20 +63,6 @@ function getHeightFromLevelDB(callback) {
     .on('close', function () {
       callback(i-1);
     });
-}
-
-/* ===== Block Class ==============================
-|  Class with a constructor for block 			   |
-|  ===============================================*/
-
-class Block{
-	constructor(data){
-     this.hash = "",
-     this.height = 0,
-     this.body = data,
-     this.time = 0,
-     this.previousBlockHash = ""
-    }
 }
 
 /* ===== Blockchain Class ==========================
@@ -155,7 +142,7 @@ class Blockchain{
     }
 
     // ● Validate blockchain stored within levelDB
-    validateChain(){
+    async validateChain(){
       let errorLog = [];
       let chain = [];
       let i = 0;
