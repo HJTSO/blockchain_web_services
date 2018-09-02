@@ -142,7 +142,7 @@ class Blockchain{
     }
 
     // ● Validate blockchain stored within levelDB
-    async validateChain(){
+    validateChain(){
       let errorLog = [];
       let chain = [];
       let i = 0;
